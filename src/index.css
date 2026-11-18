@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Minimalist, human-designed neutral palette */
+  --color-canvas: #F9FAFB;
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #FFFFFF;
+  --color-ink: #111827;
+  --color-muted: #6B7280;
+  --color-border: #E5E7EB;
+
+  /* Restrained, elegant forest teal */
+  --color-primary: #0F766E;
+  --color-primary-text: #0F766E;
+  --color-secondary: #4F46E5;
+  --color-highlight: #D97706;
+
+  /* Understated AQI tokens */
+  --aqi-good: #10B981;
+  --aqi-moderate: #F59E0B;
+  --aqi-sensitive: #F97316;
+  --aqi-unhealthy: #EF4444;
+  --aqi-very-unhealthy: #8B5CF6;
+  --aqi-hazardous: #991B1B;
+}
+
+.dark {
+  /* Clean, deep charcoal dark mode (not muddy greenish) */
+  --color-canvas: #0F1416;
+  --color-surface: #161D20;
+  --color-surface-elevated: #1D262A;
+  --color-ink: #F9FAFB;
+  --color-muted: #9CA3AF;
+  --color-border: #232D32;
+
+  --color-primary: #14B8A6;
+  --color-primary-text: #2DD4BF;
+  --color-secondary: #818CF8;
+  --color-highlight: #FBBF24;
+
+  --aqi-good: #34D399;
+  --aqi-moderate: #FBBF24;
+  --aqi-sensitive: #FB923C;
+  --aqi-unhealthy: #F87171;
+  --aqi-very-unhealthy: #A78BFA;
+  --aqi-hazardous: #F87171;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--color-ink);
+  background-color: var(--color-canvas);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Accessible Skip Link */
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--color-ink);
+  color: var(--color-canvas);
+  font-weight: 600;
+  border-radius: 8px;
+  transition: top 0.2s ease;
+}
+
+.skip-to-content:focus {
+  top: 1rem;
+  outline: 2px solid var(--color-primary);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+}
