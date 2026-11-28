@@ -22,13 +22,13 @@ const SUGGESTED_QUESTIONS = [
 
 export const AskExhaleChat: React.FC = () => {
   const { profile, airQuality } = useAppStore();
-  const [messages, setMessages] = useState<ChatMessage[]>([
+  const [messages, setMessages] = useState<ChatMessage[]>(() => [
     {
       id: 'welcome',
       role: 'assistant',
       content:
         "Hi, I'm Exhale. Ask me anything about today's smog levels, safe exercise windows, mask types, or indoor air filtration for your household.",
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      timestamp: 'Just now',
     },
   ]);
   const [inputValue, setInputValue] = useState('');

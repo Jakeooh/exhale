@@ -3,6 +3,7 @@ import { useAppStore } from '@/shared/lib/store';
 
 export const PrintFamilyActionPlan: React.FC = () => {
   const { profile, airQuality, dayPlan, indoorHacks, swaps, communityActions } = useAppStore();
+  const [printDate] = React.useState(() => new Date().toLocaleDateString());
 
   if (!profile || !airQuality) return null;
 
@@ -16,7 +17,7 @@ export const PrintFamilyActionPlan: React.FC = () => {
           Exhale — Family Clean Air Action Plan
         </h1>
         <p className="text-sm text-gray-700">
-          Location: <strong>{profile.location.name}</strong> • Date: {new Date().toLocaleDateString()}
+          Location: <strong>{profile.location.name}</strong> • Date: {printDate}
         </p>
         <p className="text-xs text-gray-600">
           Household: {profile.household.membersCount} members ({profile.household.homeType}) • Sensitive members:{' '}

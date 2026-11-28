@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 export interface NumberCounterProps {
   value: number;
@@ -18,20 +18,20 @@ export const NumberCounter: React.FC<NumberCounterProps> = ({
   className = '',
 }) => {
   const [displayValue, setDisplayValue] = useState(value);
+  const prevValueRef = useRef(value);
 
   useEffect(() => {
-    // Respect prefers-reduced-motion
     if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setDisplayValue(value);
       return;
     }
 
-    let startTimestamp: number | null = null;
-    const startValue = displayValue;
+    const startValue = prevValueRef.current;
+    prevValueRef.current = value;
     const diff = value - startValue;
 
     if (diff === 0) return;
 
+    let startTimestamp: number | null = null;
     let animationFrameId: number;
 
     const step = (timestamp: number) => {
@@ -54,10 +54,16 @@ export const NumberCounter: React.FC<NumberCounterProps> = ({
     return () => cancelAnimationFrame(animationFrameId);
   }, [value, durationMs]);
 
+  const prefersReduced =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const renderedNumber = prefersReduced ? value : displayValue;
+
   return (
     <span className={className}>
       {prefix}
-      {displayValue.toFixed(decimals)}
+      {renderedNumber.toFixed(decimals)}
       {suffix}
     </span>
   );

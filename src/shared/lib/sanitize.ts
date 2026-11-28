@@ -30,11 +30,18 @@ export function roundLocationCoords(lat: number, lon: number): { latitude: numbe
  */
 export function sanitizeText(input: unknown, maxLength = 200): string {
   if (typeof input !== 'string') return '';
-  return input
+  // Strip ASCII and Latin-1 control characters cleanly without flagged regex control codes
+  let clean = '';
+  for (let i = 0; i < input.length; i++) {
+    const code = input.charCodeAt(i);
+    // Keep standard printable characters, line breaks, carriage returns, and tabs
+    if ((code >= 32 && code !== 127 && (code < 128 || code > 159)) || code === 10 || code === 13 || code === 9) {
+      clean += input[i];
+    }
+  }
+  return clean
     .trim()
-    // Remove control characters (including null bytes and backspaces)
-    .replace(/[\u0000-\u001F\u007F-\u009F]/g, '')
-    // Replace raw HTML bracket delimiters with standard safe characters
+    // Replace raw HTML bracket delimiters with standard safe entities
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .slice(0, maxLength);

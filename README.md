@@ -174,11 +174,17 @@ npm run dev
 ```
 Open your browser at `http://localhost:5173`.
 
-### Automated Test Suite
-Exhale comes with 47 automated unit, integration, and accessibility tests:
+### Automated Test Suite & Coverage
+Exhale includes 68 automated unit, integration, feature, and accessibility tests across 9 test suites:
 ```bash
 # Run all tests once
 npm test
+
+# Run tests with code coverage report (v8)
+npm run test:coverage
+
+# Run static analysis and linting (0 warnings, 0 errors)
+npm run lint
 
 # Run tests in watch mode
 npm run test:watch
